@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -12,12 +13,14 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JLabel;
 
 public class LoginFrame {
 
 	private JFrame frame;
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -63,31 +66,55 @@ public class LoginFrame {
 		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		txtUsername.setForeground(new Color(169, 169, 169));
 		txtUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		txtUsername.setText("Username");
-		txtUsername.setBounds(233, 158, 264, 38);
+		txtUsername.setBounds(263, 156, 338, 38);
 		frame.getContentPane().add(txtUsername);
 		txtUsername.setColumns(10);
 		
-		txtPassword = new JTextField();
-		txtPassword.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtPassword.setText("");
+		JButton btnSignIn = new JButton("Sign in");
+		btnSignIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
+				String uname = txtUsername.getText();
+				String pass =  txtPassword.getText();
+				
+				if (uname.equals("name") && pass.equals("pass"))
+				{
+					JOptionPane.showMessageDialog(frame, "Sign In Sucessfull");
+					MainMenu mainmenu = new MainMenu();
+					mainmenu.setVisible(true);
+				
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(frame, "Sign in Failed");
+				}
 			}
 		});
-		txtPassword.setText("Password");
-		txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPassword.setForeground(new Color(169, 169, 169));
-		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(233, 207, 264, 38);
-		frame.getContentPane().add(txtPassword);
-		
-		JButton btnSignIn = new JButton("Sign in");
 		btnSignIn.setForeground(new Color(255, 255, 255));
 		btnSignIn.setBackground(new Color(0, 191, 255));
-		btnSignIn.setBounds(287, 265, 164, 38);
+		btnSignIn.setBounds(263, 269, 164, 38);
 		frame.getContentPane().add(btnSignIn);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(263, 212, 338, 34);
+		frame.getContentPane().add(txtPassword);
+		
+		JButton btnRegister = new JButton("Sign Up");
+		btnRegister.setForeground(Color.WHITE);
+		btnRegister.setBackground(new Color(0, 191, 255));
+		btnRegister.setBounds(437, 269, 164, 38);
+		frame.getContentPane().add(btnRegister);
+		
+		JLabel lblNewLabel = new JLabel("Password:");
+		lblNewLabel.setForeground(new Color(47, 79, 79));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel.setBounds(81, 212, 172, 38);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel label = new JLabel("Username :");
+		label.setForeground(new Color(47, 79, 79));
+		label.setFont(new Font("Tahoma", Font.BOLD, 20));
+		label.setBounds(81, 156, 172, 38);
+		frame.getContentPane().add(label);
 	}
 }
